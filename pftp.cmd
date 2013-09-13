@@ -1,0 +1,5 @@
+@echo off
+SET PSICOM=com2
+SET PSIBAUD=115200
+SET LOCPATH=.\LOCALE;
+psiftp.exe %1 %2 %3

@@ -1,0 +1,3 @@
+prompt off
+backup c: backup\c
+backup d: backup\d

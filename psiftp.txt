@@ -1,0 +1,29 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: psiftp.zip
+       Short Description: Psion OS/2 utilities (v1.51)
+        Long Description: Text mode ftp-like utilities for Psion Series 3(5).
+                          For a files transfer and files conversion, with a
+                          Rexx interface.
+                          This utilities don't use any TCP/IP stack calls.
+
+      Proposed directory
+           for placement: /pub/os2/apps/comm
+
+               Your name: Andrei A. Porodko
+           Email address: andy@cbs-edu.chel.su
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 v2, v3, v4, v4.5, Psion Series 3, Sienna, 
+                          Series 5, Series 5Mx, Series7, Revo etc.
+ Additional requirements: HPFS or JFS volume for backup (need long names)
+
+                Replaces: Psiftp v1.5
+

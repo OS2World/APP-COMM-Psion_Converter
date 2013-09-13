@@ -1,0 +1,5 @@
+@echo off
+SET PSICOM=com1
+SET PSIBAUD=19200
+SET LOCPATH=.\LOCALE;
+psiprn.exe %1 %2 %3

@@ -1,0 +1,28 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: psiconv.zip
+       Short Description: Psion<->OS/2 data files conversion utility (v0.8.3)
+        Long Description: Command line Psion data files conversion utility.
+                          For people why doesn't want to download whole
+                          psiftp package. OS/2 port of the original PsiConv
+                          utility by Frodo Looijaard <frodol@dds.nl>
+      Proposed directory
+           for placement: /pub/os2/apps/comm
+
+               Your name: Andrei A. Porodko
+           Email address: porro@cbs-edu.chel.su
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: ftp://cbs-edu.chel.su/pub/Porro/Psion
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 v2, v3, v4, v4.5, Psion Series 3, Sienna, 
+                          Series 5, Series 5Mx, Series7, Revo etc.
+ Additional requirements: PsiFtp of any version or Psion-plugin with Netdrive               
+
+                Replaces: Psicon v0.8.1
+

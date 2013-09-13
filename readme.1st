@@ -1,0 +1,181 @@
+Copyright (C) 1999-2002 Andrei A. Porodko <porro@cbs-edu.chel.su>
+
+Psion OS/2 utilities. Last time notes.
+
+v1.5     Print-server support was added. Now it is possible to use Psion's 
+         "Print via PC" feature when PsiFtp is running. Almost all of the 
+         basic graphics primitives are supported. Note. To get as much as 
+         closer to the original results you should have on your PC the same
+         font's set as you have on Psion. Otherwise - font substitution
+         isn't a good idea.
+v1.4     Partial reconnection feature was added. New version of PsiConv (see 
+         PsiConv doc for improvements). Backup can now keep separated backups 
+         for devices with different serial-numbers. Backup adds serial number
+         into the destination path (restore makes the same). Note. This 
+         feature doesn't work with Series 3 and similar (Sibo16), because 
+         they haven't ability to send their serial numbers. This feature
+         can be turned off/on with a new command "snumb off/on".
+         Install feature was added. Now it's possible to install application
+         remotely using .ctl files.
+v1.3     Improved performance (about 10-15%). Fixed some little bugs in
+         RPC. RPC with my Sibo emulator is still unstable. If you are interested
+         in RPC support for Sibo machines drop me a e-mail. Fixed error in
+         the Rexx example for RPC.
+v1.2     Command line switch '-r' is added. For switching off RPC 
+         support for old Sibo machines (which haven't got SYS$RPCS.IMG
+         properly installed. Consult your Psion User's manual for details). 
+         Rexx interface is released. Port of PsiConv wasn't changed, I'm 
+         waiting for RTF suppord released.       
+v1.1     The project has a new additional author: Mike A. Potapoff. He's
+         writing Rexx interface. Documetation for PsiFtp is now included
+         into that package. Rexx interface is only preface version and
+         is temporary removed for fixing bugs ...;-)
+v1.1b    Some new commands added : 
+            "ps <psidrive>" - get list of the running processes on Psion.
+                              for Psion older than Series 5 you should
+                              indicate a drive name from where programms
+                              were started.
+            "kill <psdrive> <pid>" - kill selected process on Psion.
+            "run <prog> <arg>" - run specified program on Psion with an
+                              argument.
+            "owner"         - show Psion owner information.
+            "psion"         - show Psion's information.
+            "synct"         - synchronize Psion and your PC clocks.
+v1.0     Some little changes. And one important thing - I've made psiftp 
+         engine compatible with Psion-plugin for NetDrive. Replaced psiconv 
+         with new one.
+v0.97    Add some new commands. "rem" and "echo" for batch files. Increased
+         command line length up to 254 bytes. Add "retry" dialog for multiply
+         operation commands, such as "mget/mput", "backup/restore". Now, if,
+         for example, a file is busy, you'll be asked for "retry" operation
+         (Certainly if "prompt" is "on" ;-). You can turn off this dialog,
+         simply switch off prompting by command "prompt off".
+         Log-file was added. For log-file creation, simple redirect "stderr" to a 
+         filename : psiftp 2>logfilename.
+         PsiPrn didn't changed at all (yet).
+         Directory "Lib" contains a library, some headers and an example for
+         Psion link.
+         Command "resp <y|n|q>" was added. When prompting is off, you can
+         automaticaly control the answer 'yes' or 'no' or 'quit'. Useful, for
+         example, when restoring files from backup. Normally, psiftp compare 
+         the files's dates, if Psion file older than PC's one, file will be
+         always restored. Othewise you'll be asked for suggestion "Overwrite ?".
+         If you want to restore only newest Psion files, you can create
+         batch file :
+             prompt off
+             resp n
+             restore PC\D D:
+         PsiFtp will skip all the same files (both in Psion and PC).
+         
+v0.96    Fix some little bugs. PsiConv didn't updated. It will be available
+         as separated program, because it has very big executable module.
+
+         Hint. You can use "cls" command for screen cleaning.
+         Hint. If you create your own automated procedures, you need to 
+         know whats happens ? PsiFtp returns error codes, listed below:
+
+         0  "OK"
+         1  "Bad CRC"
+         2  "Async read error"
+         3  "No enough memory"
+         4  "I/O timeout. Check, is Psion on ?"
+         5  "Too big packet"
+         6  "Break connection"
+         7  "Bad PLP packet"
+         8  "Queue overflow"
+         9  "No empty channel"
+         10 "Message on unknown channel"
+         11 "Unknown status"
+         12 "Unknown NCP packet"
+         13 "Bad NCP packet"
+         14 "Empty NCP packet"
+         15 "Can not start PLP link thread"
+         16 "Can not create semaphore"
+         17 "Bad queue"
+         18 "Unexpected end of buffer"
+         19 "Bad RFSV response"
+         20 "Psion returns error"
+         21 "Can not start ping thread"
+         22 "Can not auto-detect serial port baudrate"
+         23 "File not found"
+         24 "Async write error"
+         25 "Async error, many resends"
+         26 "Unable to find locale tables"
+        101 "Error on EA write"
+        102 "Error on EA restore"      
+
+v0.95    Add system's events handler for a cleaner program exit. For a
+         first time, I'm including a port of PsiConv utility by
+         Frodo Looijaard <frodol@dds.nl>. For a while, this unility can
+         convert Psion's Word files to ASCII, HTML and HTML v4.
+
+v0.94    Fix some little bugs and one great bug. But it wasn't my.
+         I use "iconv" - series of national languages support routines.
+         But, in fact, IBM doesn't put in OS/2 some DLLs and tables (so,
+         puts them only into Visual C++ package). Even Aurora doesn't
+         have them. Now I know, why can't see any good Russian-translated
+         programs :-(
+         I include needed DLLs and several translation tables. You can
+         place content of attached directory "LOCALE" to the same directory
+         from "LOCPATH" environment variable. Or, you can simply start
+         program through command file.
+
+v0.93    Fix some little bugs.
+         New command "!<os cmd>" - run any OS/2 command. New command
+         "@<cmdfile>" - "run" command file (can be used any of psiftp
+         commands, exept other "cmd" files).
+
+         Note. Keep your Psion switched-on when using psiftp.
+
+         Hint. For Psion Series 5 you can use long names. You have
+         use them in quotation marks : "D:\This is long name".
+
+v0.92    New commands "backup <psion dir> <pc dir>",
+         "restore <psion dir> <pc dir>". Commands compare files's
+         modification time, checks attribute "archive" and copy
+         all of them with subdirectories. All Psion attributes
+         preserved in OS/2 EA. And (I hope :-) are fully restored.
+
+         New command "sattr [+|-][rhsa] <psionfile>. Change file
+         attributes for Psion's file.
+
+         Note : I have got a problem with "set file date" function
+         on Psion Series 3 emulator (Y2K ?). I made workaround,
+         but if you will have got it too, let me know, please.
+
+         Note : for Psions before Series 5 program shows attributes
+         differently in "dir" command and in "gattr" command.
+
+         Made a little modification in error response code (improve
+         error detection).
+
+         Hint. If you didn't it find yet, you can use "up" and
+         "down" arrow keys as in OS/2 command line (command history).
+
+         Hint. Instead of "exit" you can simply press <ESCAPE>.
+
+         Hint. You can call program with "command file" : psiftp @file.
+
+v0.91    First public release.
+
+Psiftp - How to use ? Run with -? option and read. Set up
+         needed speed. No additional programs on Psion needed.
+         Sorry, performance not the best ;-) yet... Tested with
+         my Psion Series 5 and all neighbouring PCs, also with
+         Psion Series 3 and Sienna emulators. Program supports
+         national languages.
+
+Psiprn - How to use ? Run with -? option and read. Set up on
+         your Psion appropriate printer, select printer connected
+         via serial line, then select speed, handshake (I recommend
+         115200 for Series 5, or 19200 for other, handshake RTS/CTS,
+         DSR/DTR). If you have got Psion with language differ from
+         English, Psion must have right printer drivers with your
+         language support. Sorry for Russian users, translation
+         works only for "GENERAL" printer type.
+
+    You can't use Psiftp and Psiprn at one time, because Psion can
+use serial line only (as far as I know) for one job and you'll
+receive "Busy" message on your one.
+
+If you have bug report or suggestions, you are welcome :-)

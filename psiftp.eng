@@ -1,0 +1,110 @@
+Short info about utilities.
+--------------------------------------------------------------------------
+
+PsiFtp.
+Native OS/2 version, not a Linux port.
+
+Usage : psiftp [ftpcommand parameters] [-r] [-a] [-h] [-c:N] [-b:N] [@file]
+        -p   - switch off print-server support (for old Psions);
+        -r   - switch of RPC support (needs for some old Sibo machines);
+        -a   - autobaud detection;
+        -h   - this screen;
+        -c:N - serial port number;
+        -b:N|-s:N - serial port speed;
+        -l:nnn - codepage for Psion, where
+                 nnn is valid codepage name (i.e. IBM-850);
+        @file - ftp command-file.
+
+  There are 3 environment variables :
+        PSICOM=COMx - serial port name;
+        PSIBAUD=xxx - serial port speed;
+        PSICP=IBM-xxx - Psion's codepage name.
+
+List of available commands, the most commands relays Psion's side, only a some of them
+for PC.
+
+  pwd                       - print current pathes on Psion and on PC
+  ren <oldname> <newname>   - rename file on Psion
+  touch <psionfile>         - set Psion's file date/time to current.
+  gtime <psionfile>         - give date/time for Psion file (depends from Psion version this is the 
+                              date/time of file creation or of the last access)
+  test <psionfile>          - test Psion's file
+  gattr <psionfile>         - get Psion's file's attributes
+  sattr [[-|+]rhsa] <psionfile> - set attributes
+  devs                      - get devices list
+  dir|ls                    - ;-)
+  dircnt                    - get number of entryes in the current directory
+  cd <dir>                  - change directory on Psion
+  lcd <dir>                 - change directory on PC
+  get <psionfile>           - get file from Psion
+  put <pcfile>              - put file to Psion
+  mget <shellpattern>       - multiply get with pattern (*,? etc)
+  mput <shellpattern>       - multiply put with pattern (*,? etc)
+  del|rm <psionfile>        - delete file on Psion
+  mkdir <psiondir>          - create directory on Psion
+  rmdir <psiondir>          - remove directoru on Psion
+  backup <psiondir> <pcdir> - create Psion's backup from selected directory (files saved with 
+                              attributes on selected PC folder)
+  restore <pcdir> <psiondir>- corresponding, restore Psion's files 
+  prompt <on|off>           - turn on/off ask for multipy get/put for each file
+  ps <psidrive>             - show list of running (perhaps from the specified
+                              drive) programs on Psion
+  kill <psdrive> <pid>      - kill started (perhaps from the specified drive)
+                              program by its pid
+  run <prog> <arg>          - run specified program on Psion
+  owner                     - show Psion owner information
+  psion                     - show information about your Psion
+  synct                     - synchronize Psion and PC clocks
+  install <.ctl file>       - install application info Psion via .ctl file
+  snumb <on|off>            - turn off a serial number sensitive backup/restore
+  cls                       - clear screen
+  rem | ;                   - program skips such lines
+  resp <y|n|q>              - setup default response when prompting is off
+  echo <text>               - puts text to screen
+  !<os cmd>                 - invoke any OS command
+  @<cmdfile>                - "run command file", file can contain any of this command
+  bye                       - end of session
+
+--------------------------------------------------------------------------
+PsiPrn.
+Native OS/2 version, not a Linux port.
+
+Usage: psprint [-h|?] [-t:xxx] [-c:N] [-b:N|s:N] [-p:N] [-l:nnn]
+       -h   - this screen;
+       -t:xxx - set printer type (GENERAL|EPSON|PCL);
+       -c:N - serial port number;
+       -b:N|-s:N - serial port speed;
+       -p:N - printer port number;
+       -j:N - print job timeout (sec);
+       -l:nnn - codepage for Psion, where
+                nnn is valid codepage name (i.e. IBM-850);
+
+  There are 5 environment variables :
+        PSICOM=COMx - serial port name;
+        PSIBAUD=xxx - serial port speed;
+        PSIPTYPE=xxx - set printer type;
+        PSIJOBTIMEOUT=xxx - job timeout;
+        PSICP=IBM-xxx - Psion's codepage name.
+
+--------------------------------------------------------------------------
+PsiConv.
+Full Linux port.
+
+Syntax: psiconv [OPTIONS..] [FILE]
+Convert the psion Word file FILE to a HTML file
+If FILE is not specified, use stdin
+  -d, --debug          Show debug information on stderr
+  -e, --exact          Quit on any parse errors or warnings
+  -h, --help           Display this help and exit
+  -o, --outputfile     Output to file instead of stdout
+  -s, --silent         Do not even show warnings on stderr
+  -T, --type=FILETYPE  Output type
+  -V, --version        Display the program version and exit
+  -v, --verbose        Show progress indicators on stderr
+
+The following output types are known:
+  ASCII          Plain text without much layout
+  HTML3          HTML 3.2, not verified so probably not completely compliant
+  HTML4          HTML 4.0 with cascading style sheets
+
+--------------------------------------------------------------------------
