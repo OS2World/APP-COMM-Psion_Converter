@@ -1,0 +1,55 @@
+This README provides information about the psiconv HTML4 output generator.
+
+Output files generated using the option `-t HTML4' use cascading style sheets
+(CSS1) with embedded style rules to specify all text formatting information,
+rather than using the more commonly-used HTML version 2.0 and 3.2 elements such
+as <FONT>, <B>, <CENTER> etc.  Output files can thus only be properly displayed
+on the more recent web-browsers such as Netscape 4.x and IE 4.0, but the output
+is a much more accurate conversion from the original Psion document than is
+possible with HTML 2.0 or 3.2.  Browsers that do not support cascading style
+sheets will show the text but no character or paragraph formatting.
+
+Output files that do not contain user-written HTML constructs should comply
+with W3C's HTML 4.0 Strict DTD [not checked yet; anj 20-Jun-1999].
+
+The text on the first line of the document header is used as the page title.
+
+Hard page-breaks are converted into a horizontal rule <HR>.  Unfortunately in
+Netscape 4.51 any text following in the same paragraph loses its styling, so
+this should really only be used at the end of a paragraph.
+
+Paragraph borders using the types dot-dash and dot-dot-dash are converted to
+dashed and dotted respectively, as these two Psion types do not have a direct
+equivalent in HTML 4.0.  However Netscape 4.51 only seems to display borders as
+solid, and in only one color (black).
+
+Netscape also doesn't seem to handle superscript and subscript properly using
+the style sheet approach, so the reason these don't work is due to their bug,
+not mine.
+
+Bullets are supported, but the output is not quite the same as on the Psion.
+HTML lists don't allow you to pick your own character for the bullet like the
+Psion does (you could use an image of the relevent character, but you'd have to
+create it on-the-fly to get the right foreground color for full support), and
+they're not particularly straight-forward to use, so I don't. 
+
+Short HTML constructs such as hyperlinks and images can be entered in the Word
+document by using the Psion characters CTRL+139 and CTRL+155 (the single
+angle-quote characters lsaquo and rsaquo), which are converted into < and >
+respectively in the output file.  Longer constructs such as tables would
+probably interact with the paragraph formatting to the detriment of both,
+although if kept "on one line" (ie within a single Psion paragraph) they may be
+feasible.
+
+The only major facilities provided by Psion Word that are missing from the
+HTML4 output are support for tabs and embedded objects.  Tabs look to be
+impossible to implement properly because HTML does not provide an equivalent
+construct (tables are not suitable for anything other than superficial support.
+The classical typewriter model of tabs needs to know the current print position
+in order to work out which tab stop to align to next; the print position of a
+particular character will depend upon the font in use).  Embedded objects need
+the relevent stream formats to be documented and suitable converters
+implemented (embedded Sheet files could be converted into tables, and Sketches
+into inline images).
+
+- Andrew Johnson <anjohnson@iee.org>

@@ -1,0 +1,272 @@
+<HTML>
+<HEAD>
+<META Name="Generator" Content="Lotus Word Pro"></META>
+<TITLE>Body</TITLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+
+
+<UL><FONT SIZE="4"><B><IMG SRC="3c744f6d.jpg" ALIGN="BOTTOM" BORDER="0" WIDTH="197" HEIGHT="152"></IMG>	PsiFtp: Psion to OS/2 communication utilities.</B></FONT><B></B></UL>
+
+<P><B>Introduction</B>. Psion utilities for OS/2 is a set of utilities to organize communication between your Psion Personal Digital Assistant (PDA) and your Personal Computer (PC) under OS/2. All programs are text-window OS/2 applications with a wide set of commands. Psion utilities for OS/2 don't require to install any additional software on your Psion. As I've been reported, they work with the whole range of Psion devices. If you need access to your Psion from OS/2 and if you aren't afraid of printing commands on a keyboard - these are your utilities.
+<P><B>Features:</B>
+<UL TYPE="disc">
+	<LI><B></B>Support whole family of Psion PDAs -
+	<UL TYPE="disc">
+		<LI>Series 3, 3a, 3c;
+		<LI>Sienna; 
+		<LI>Workabout; 
+		<LI>Series 5, 5Mx;
+		<LI>Revo, Revo Plus;
+		<LI>Netbook;
+		<LI>Series 7.
+	</UL>
+	<LI>Support all communication baud rates from 300 bps to 115200 bps;
+	<LI>Allow you to copy a single file from/to your Psion as well as multiply files at once using wildcards;
+	<LI>Support full and partial backup and restore from all data on your Psion;
+	<LI>Allow to automate routine tasks through command files;
+	<LI>Support serial port printing through a PC;
+	<LI>Convert Psion &quot;Word&quot; and &quot;Sketch&quot; files to HTML and different graphics formats.
+<P><B>Installation and quick start. </B>Psion to OS/2 communication utilities are supplied on a single zip-archive - <I>psiftp.zip. </I>To install you should create a free directory, copy and unzip the archive. <I>Note. After unzipping you can either remove source archive or put it somewhere for backup purposes. </I>The PsiFtp utilities consist of the following programs : 
+	<LI TYPE=disc><I>PsiFtp</I> - file transfer program, 
+	<LI TYPE=disc><I>PsiPrn</I> - serial link print support program,
+	<LI TYPE=disc><I>PsiConv</I> - port of a Linux Psion data file format conversion utility made by <I>Frodo Looijaard &lt;frodol@dds.nl&gt;.</I>
+<P><B>PsiFtp. File transfer program.</B> The easiest way to start PsiFtp is to run the command file <I>pftp.cmd</I>. It might be necessary to change this command-file if you use different communication settings. Here is a sample for <I>pftp.cmd </I>:
+<P><I>@echo off</I>
+<P><I>SET PSICOM=com1</I>
+<P><I>SET PSIBAUD=115200</I>
+<P><I>SET LOCPATH=.\LOCALE;</I>
+<P><I>psiftp.exe %1 %2 %3</I>
+<P><I>PSICOM</I> - set the name of communication port. You should enter the name of your serial port to communicate to your Psion device; i.e. com1, com2 ...
+<P><I>PSIBAUD</I> - set the communication speed. Change speed to desired in this line.<I> Note. It's not necessary to change next line. We'll discuss all commands and their arguments later</I>.
+<P>PsiFtp is ready to work now. Because PsiFtp uses the standard Psion's communication protocol you should also switch on <I>Remote link</I> on your Psion. Go to the <I>System-&gt;Tools-&gt;Remote link-&gt;Link - Cable,</I> than choose the baud rate. <I>Note. You have to choose the same baud rate as in pftp.cmd.</I> Now you actually can start <I>pftp.cmd</I>. After you run it you would see the next screen :<IMG SRC="3c744f6e.jpg" ALIGN="BOTTOM" BORDER="0" WIDTH="739" HEIGHT="442"></IMG>
+<P>Program is ready to accept your commands.
+<P><B>How to work with PsiFtp.</B> Work with PsiFtp almost looks like a work with usual &quot;old fashioned&quot; ftp-client. With PsiFtp running you have two sides, PC's side (local) and Psion's side (remote). Using different commands you can look through a list of files on Psion and on local PC, transfer files between local and remote sides, and perform other useful actions.
+<P><B>Prompt. </B>For<B> </B>your convenience, when program is ready to accept your command it &quot;prompts&quot; you with a text consists of the name of current remote drive and the name of current remote directory. Thus, you always know where you are on Psion.<B></B>
+<P><B>Commands. </B>Most of commands<B> </B>are English abbreviations or reduced<B> </B>English words. And most of them are very similar to DOS or OS/2 command line sessions. It's possible to print commands and their arguments either on the low register or with the capital letters. PsiFtp (as OS/2 is) isn't case-sensitive. When we talk about the names of files or directories we should take in consideration that they could be either relative or absolute. <I>MyFileName</I> - is the sample of the relative name (file places on the current drive, in the current directory). <I>D:\Documents\MyFileName</I> - is the sample of the absolute name (in the file name is provided the drive name and the directory name where the file resides). For Psion Series 5 you can use long names. You have to print them in the quotation marks : <I>&quot;D:\This is long name&quot;.</I>
+<P><I>dir</I> or <I>ls</I>	- &quot;<B>d</B>irectory&quot; or &quot;<B>l</B>i<B>s</B>t&quot;, show the list of files for the current directory on Psion. Example:<I><U> C:\System&gt;</U>dir</I>
+<P>This commands might have an argument - the name of  the directory to show to.
+<P>Example:<I><U> C:\System&gt;</U>dir</I> <I>D:\Documents\*.txt</I>
+<P><I>dircnt</I>	- &quot;<B>d</B>irectory <B>c</B>ount&quot;, count and show number of items in the current directory.
+<P>Example:<I><U> C:\System&gt;</U>dircnt</I>
+<P><I>devs</I>	- show the list of drives on Psion and their characteristics. For example Psion Series 3 has two drives named <I>&quot;M:&quot;</I> and <I>&quot;N:&quot;.</I>
+<P>Example:<I><U> C:\System&gt;</U>devs</I>
+<P><I>pwd</I>	- &quot;<B>p</B>rint <B>w</B>orking <B>d</B>irectory&quot;, show the current directory for local and remote sides.
+<P>Example:<I><U> C:\System&gt;</U>pwd</I>
+<P><I>cd</I>	- &quot;<B>c</B>hange <B>d</B>irectory&quot;, change current (working) directory on Psion. Command has an argument - the name of the directory to change to.
+<P>Example : <I><U>C:\System&gt;</U>cd \Documents</I>.
+<P>There is no any particular command to change current drive on Psion. You can just print the name of the desirable drive - i.e.   &quot;a:&quot;,   &quot;b:&quot;,   &quot;c:&quot;,  or what else.
+<P>Example : <I><U>C:\System&gt;</U>D:</I>
+<P><I>lcd</I>	- &quot;<B>l</B>ocal<B> c</B>hange <B>d</B>irectory&quot;, change current (working) directory on your PC. Command has an argument - the name of the directory to change to.
+<P>Example : <I><U>C:\System&gt;</U>lcd D:\Psion\AgendaToSync.</I>
+<P><I>ren</I>	- &quot;<B>r</B>ename&quot;, rename file or directory. Command has two arguments. First, the name of file to rename to. Second, the destination name of file. 
+<P>Example : <I><U>C:\System&gt;</U>ren</I> <I>MyOldDocument MyNewDocument</I>
+<P><I>del </I>or <I>rm</I>	- &quot;<B>d</B>elete&quot; or &quot;<B>r</B>emove&quot;, delete file or group of files by a mask. Command has only one argument - the name of file to delete. Instead of the name of file here can be the file mask.
+<P>Example : <I><U>C:\System&gt;</U>del Old</I>*
+<P><I>mkdir</I>	- &quot;<B>m</B>ake <B>d</B>irectory&quot;, create new directory on Psion. Command has an argument - the name of directory to create. 
+<P>Example : <I><U>C:\System&gt;</U>mkdir D:\ Old</I>*
+<P><I>rmdir</I>	- &quot;<B>r</B>emove <B>d</B>irectory&quot;, remove directory. Command has an argument - the name of  directory to remove. <I>Note. You can delete directory only if there isn't any file in this directory.</I>
+<P>Example : <I><U>C:\System&gt;</U>mkdir D:\ Old</I>*
+<P><I>touch</I>	- touch file. Command has one argument - the name of file to touch. This touch changes the date and the time of file creation to the current time.
+<P>Example : <I><U>C:\System&gt;</U>touch MyOldFIle</I>
+<P><I>gtime</I>	- &quot;<B>g</B>et <B>t</B>ime&quot;, show the time of  file creation.
+<P>Example : <I><U>C:\System&gt;</U>gtime MyFile</I>
+<P><I>test</I>	- test the file. If there is such file, command prints &quot;OK&quot;. If there isn't - error message. Command allows to check up the file presence. The only argument is the name of that file.
+<P>Example : <I><U>C:\System&gt;</U>test MyFile</I>
+<P><I>gattr</I>	- &quot;<B>g</B>et <B>a</B>ttributes&quot;, each file has attributes, so you can see them with this command. Argument is the name of file to get attributes.
+<P>Example : <I><U>C:\System&gt;</U>gattr MyFile</I>
+<P><I>sattr</I>	- &quot;<B>s</B>et <B>a</B>ttributes&quot;, this command allows you to change file attributes mentioned above. It's possible to change next attributes : R - ready only, H - hidden, S - system, A - archived.
+<P>Example 1, this command sets up attributes &quot;read-only&quot; and &quot;hidden&quot;:
+<P> <I><U>C:\System&gt;</U>sattr MyFile</I> +RH
+<P>Example 2, this command removes attributes &quot;system&quot; and &quot;archived&quot;:
+<P> <I><U>C:\System&gt;</U>sattr MyFile</I> -SA
+<P><I>get</I>	- &quot;<B>g</B>et&quot; the file from the Psion. In other words command allows you to copy a single file from Psion to PC. Commands has two arguments, but the second arguments is optional. First argument is the name of file to copy from Psion, the second is the name of file to copy to  your PC. If you don't enter the second argument, the file will be copied into the current directory on your PC.
+<P>Example : <I><U>C:\System&gt;</U>get C:\Documents\MyFile D:\Psion\MyPsionDocuments\MyFile</I>
+<P><I>put</I>	- &quot;<B>p</B>ut&quot; the file to Psion. In other words command allows you to copy a single file from PC to Psion. Commands has two arguments, but the second arguments is optional. First argument is the name of file to copy from PC, the second is the name of file to copy to your Psion. If you don't enter the second argument, file will be copied into the current directory on your Psion.
+<P>Example : <I><U>C:\System&gt;</U>put D:\Psion\MyPsionDocuments\MyFile C:\Documents\MyFile</I>
+<P><I>mget</I>	- &quot;<B>m</B>ultiply<B> g</B>et&quot; , copy the group of files from Psion. This command has the same arguments as the &quot;get&quot;, but as the file name you can use a file mask. This command interacts with other command called &quot;prompt&quot;. If the &quot;prompt&quot; is &quot;off&quot;, &quot;mget&quot; just copy all files. If the &quot;prompt&quot; is &quot;on&quot;, &quot;mget&quot; will ask a confirmation for each file to copy to. This mechanism allows to control copying within the selected group of files.
+<P>Example : <I><U>C:\System&gt;</U>mget C:\Documents\* D:\Psion\MyPsionDocuments\*</I>
+<P>	<I><U>Get &quot;data.txt&quot; (y/n/q) ?</U> &lt;Enter&gt;</I>
+<P>You have three alternatives to answer - press 'y' and file will be copied, press 'n' and file won't be copied, press 'q' - to cancel operation.
+<P><I>mput</I>	- &quot;<B>m</B>ultiply<B> p</B>ut&quot; , copy the group of files to Psion. This command is same as previous one, except the fact that the copying is made to the Psion (in the back direction).
+<P>Example : <I><U>C:\System&gt;</U>mput D:\Psion\MyPsionDocuments\*</I> <I>C:\Documents\*</I>
+<P><I>prompt</I>	- as we told above, this command controls the confirmations. Commands has one optional argument. If you call this command without any arguments, it switches over the prompt state and shows it for you. If you call it with an argument, this argument can be <I>&quot;on&quot;</I> - to turn on the confirmations, or <I>&quot;off&quot;</I> - vise versa.
+<P>Example : 	<I><U>C:\System&gt;</U>prompt off</I>
+<P>	<I><U>C:\System&gt;</U>mget *.txt</I>
+<P>	<I><U>C:\System&gt;</U>prompt on</I>
+<P><I>resp</I>	- &quot;<B>r</B>esponse&quot; sets a default response for the &quot;prompt&quot;<I>. </I>Default response can be &quot;y&quot; (yes), &quot;n&quot; (no).<I> </I>For example, set the response &quot;y&quot; allows you just press Enter to the prompt on copying file.<I></I>
+<P><I></I>Example : 	<I><U>C:\System&gt;</U>resp y</I>
+<P>	<I><U>C:\System&gt;</U>mget *.txt</I>
+<P>	<I><U>Get &quot;data.txt&quot; (y/n/q) ?</U> &lt;Enter&gt;</I>
+<P><I>bye </I>or <I>quit </I>or <I>exit</I> - any of their commands finishes PsiFtp. Frankly speaking it's enough to press &quot;Esc&quot; on your keyboard to finish PsiFtp. But this commands could be useful in the automated command files.
+<P>Example : <I><U>C:\System&gt;</U>bye</I>
+<P><I>cls</I> 	- &quot;clear screen&quot;, just clear screen and nothing else.
+<P>Example : <I><U>C:\System&gt;</U>cls</I>
+<P><I>?</I> or <I>help</I> 	- show a list of available commands (which we are discussing now
+<P>Example : <I><U>C:\System&gt;</U>help</I>
+<P><I>rem</I> or <I>;</I> 	- &quot;remark&quot;, PsiFtp doesn't recognize any text after this command. Useful for creation comments in the automated command files.
+<P>Example : <I><U>C:\System&gt;</U>rem This is my comment</I>
+<P><I>echo</I> 	- this command was entered for automated command files. This command prints its argument on the screen.
+<P>Example : <I><U>C:\System&gt;</U>echo Show me something</I>
+<P><I><U>Show me something</U></I>
+<P><I>backup</I>	- this command performs reserve backup for the Psion's data. Data stores on your PC in the any wished place. Command has two mandatory arguments - the name of Psion's directory to backup from and the name of PC's directory to backup to. This command saves all attributes of Psion's files (as well as &quot;restore&quot; command - restores them later). <I>Note1. It's possible that some files on your Psion are locked (due running Psion applications), backup will stop if it finds locked file. So, it'll be better if you turn &quot;prompt off&quot;. In this case backup just reports and skips locked files.</I> <I>Note2.</I> <I>Backup is Psion serial number sensitive, this means it can make separated backups for each Psion specimen. I.e. backup command automaticaly adds additional folder name into the backup's destination path (the restore commad makes the same). This is the default behavior. You can change it by a &quot;snumb off&quot; command.</I>
+<P>Example :	<I><U>C:\System&gt;</U>prompt off<U></U></I>
+<P><I><U></U>	<U>C:\System&gt;</U>backup C:\ D:\PsionBackup\DriveC</I>
+<P><I>	<U>C:\System&gt;</U>prompt on</I>
+<P><I>restore</I>	- this command restores all data on your Psion previously saved by &quot;backup&quot; command. This command has two mandatory arguments too. First of them - the name of  directory where backup resides. Second - the name of  Psion's directory to restore files.
+<P>Example :	<I><U>C:\System&gt;</U>prompt off<U></U></I>
+<P><I><U></U>	<U>C:\System&gt;</U>restore D:\PsionBackup\DriveC  C:\</I>
+<P><I>	<U>C:\System&gt;</U>prompt on</I>
+<P><I>snumb</I>	- as well as backup and restore commands support serial number sensitive backup/restore (for separated backup for each specimen of Psion) you may want to make backups on the old way without taking in consideration Psion's serial numbers. So you can turn off this sensitive backup and perform it as you have done before.  If you call this command without any arguments, it switches over the snumb state and shows it for you. If you call it with an argument, this argument can be either <I>&quot;off&quot;</I> - to turn off the sensitive backup, or <I>&quot;on&quot; - </I>to return to the default state.
+<P>Example : 	<I><U>C:\System&gt;</U>snumb off</I>
+<P>	<I><U>C:\System&gt;</U>backup c: mybackup\c</I>
+<P>
+<P><I>@filename</I>	- this command treats <I>filename </I>as the automated command file. It reads lines from the given file and tries to interpret them as PsiFtp commands. For example your can create next file named <I>mybackup.pcf</I>  for full backing up your Psion:
+<P><I>echo &quot;********************************************************&quot;</I>
+<P><I>echo &quot;*                                                      					*&quot;</I>
+<P><I>echo &quot;*   	                  My Psion Backup                  			*&quot;</I>
+<P><I>echo &quot;*                                                      					*&quot;</I>
+<P><I>echo &quot;********************************************************&quot;</I>
+<P><I>prompt off</I>
+<P><I>backup c: andy\c</I>
+<P><I>backup d: andy\d</I>
+<P><I>prompt on</I>
+<P><I></I>And than you can use this sequence of commands whenever you want :
+<P>Example :	<I><U>C:\System&gt;</U>@mybackup.pcf<U></U></I>
+<P><I><U></U>!command</I>	- execute &quot;external&quot; OS/2 command (program).
+<P>Example :	<I><U>C:\System&gt;</U>!dir *.txt<U></U></I>
+<P><I><U></U>install</I>	- install a Psion application via .ctl-file.
+<P>Example :	<I><U>C:\System&gt;</U>install D:\PsionProgs\newprog.ctl<U></U></I>
+<P><I><U></U></I>
+<P><I><U></U></I><B>PsiFtp's command line arguments. </B>In the simple situations it's enough for you to start the command file <I>pftp.cmd.</I> If you are going to extend using of PsiFtp you need to know how to start it with a command line arguments and which codes it returns. 
+<P><I>PsiFtp [psiftp_command parameters] [-a] [-h] [-c:N] [-b:N] [@file]</I>
+<P>Thus command line arguments are not necessary, they are &quot;bracket&quot; with &quot;[...]&quot; brackets.
+<P>[psiftp_command parameters]	- you can use here any of described above commands. PsiFtp will start, perform this command and than exit. Of course, it's possible to use here the name of  automated command file.
+<P>Example :	<I><U>C:\Psion&gt;</U>PsiFtp.exe devs<U></U></I>
+<P><I><U></U>	<U>C:\Psion&gt;</U>PsiFtp.exe @mybackup.pcf<U></U></I>
+<P><I><U></U></I>Next parameters allow to arrange with communication environment :
+<P>	-a    - auto baud detection, PsiFtp will try to find and adjust needed serial port 				speed;
+<P>	-c:N - serial port number, where N - 1,2...;
+<P>	-b:S - serial port speed, where S can be chosen from one of these values - 300, 600, 1200, 2400, 4800, 			9600, 19200, 38400, 57600, 115200;
+<P>	-s:N - the synonym for previous argument.
+<P>To show filenames content characters different from the standard English it's necessary to indicate the correct code page for your Psion. The next parameters can be used for the following purposes:
+<P>	-l:nnn - code page for Psion, where nnn is valid code page name (i.e. IBM-850, 		IBM-866 etc.);
+<P>	-p   - switch off print-server support (for old Psions);
+<P>	-r   - switch off RPC support (old Psions).&quot;
+<P>You also can redirect error messages into the file this way : <I>psiftp.exe 2&gt;logfilename</I>
+<P><B>PsiFtp environment variables.</B> PsiFtp recognizes three special environment variables. If you set them, for example, in your <I>config.sys</I>, you shouldn't indicate the speed, the port name and the code page neither in the PsiFtp's command line nor in the <I>pftp.cmd</I>. This variables are : PSICOM=COMx - serial port name; PSIBAUD=xxx - serial port speed, PSICP=IBM-xxx - Psion's code page name. Default serial port name is <I>&quot;com2&quot;</I>. Default serial port speed is 115200 bps. And default code page for Psion is <I>&quot;IBM-1251&quot;</I> (Russian code page for Psions devices).
+<P>Example :	SET PSICOM=COM1
+<P>	SET PSIBAUD=115200
+<P>	SET PSICP=IBM-850
+<P><B>PsiFtp's return codes.</B> When PsiFtp exits, it returns next codes:
+<P>         0  &quot;OK&quot;
+<P>         1  &quot;Bad CRC&quot;
+<P>         2  &quot;Async read error&quot;
+<P>         3  &quot;No enough memory&quot;
+<P>         4  &quot;I/O time-out. Check, is Psion on ?&quot;
+<P>         5  &quot;Too big packet&quot;
+<P>         6  &quot;Break connection&quot;
+<P>         7  &quot;Bad PLP packet&quot;
+<P>         8  &quot;Queue overflow&quot;
+<P>         9  &quot;No empty channel&quot;
+<P>         10 &quot;Message on unknown channel&quot;
+<P>         11 &quot;Unknown status&quot;
+<P>         12 &quot;Unknown NCP packet&quot;
+<P>         13 &quot;Bad NCP packet&quot;
+<P>         14 &quot;Empty NCP packet&quot;
+<P>         15 &quot;Can not start PLP link thread&quot;
+<P>         16 &quot;Can not create semaphore&quot;
+<P>         17 &quot;Bad queue&quot;
+<P>         18 &quot;Unexpected end of buffer&quot;
+<P>         19 &quot;Bad RFSV response&quot;
+<P>         20 &quot;Psion returns error&quot;
+<P>         21 &quot;Retry operation. Psion is reconnected&quot;
+<P>         22 &quot;Can not auto-detect serial port baudrate&quot;
+<P>         23 &quot;File not found&quot;
+<P>         24 &quot;Async write error&quot;
+<P>         25 &quot;Async error, many resends&quot;
+<P>         26 &quot;Unable to find locale tables&quot;
+<P>        101 &quot;Error on EA write&quot;
+<P>        102 &quot;Error on EA restore&quot;
+<P><B>PsiPrn. Serial link print support program.</B> Starting PsiPrn on your PC is almost similar to starting PsiFtp. There is a command file <I>pprn.cmd</I> for  your quick start. You should be convinced of the right parameters in this file:
+<P><I>@echo off</I>
+<P><I>SET PSICOM=com1</I>
+<P><I>SET PSIBAUD=115200</I>
+<P><I>SET LOCPATH=.\LOCALE;</I>
+<P><I>psiprn.exe %1 %2 %3</I>
+<P><I></I>But there is a difference for the Psion side.<B> </B>To utilize PsiPrn you have to : first - switch off the remote link on your Psion, because Psion can't use serial printing and remote link simultaneously; second - switch on serial port printing. To do the last task you should perform next actions - go to the <I>Control panel</I> on your Psion, select <I>Printer</I> and set <I>Print via-&gt;Serial</I>. Than adjust serial port settings : <I>Serial port baud rate</I> - 115200 (or any other desirable, but it must be equal with installed for PsiPrn), <I>Data bits</I> - 8, <I>Stop bits</I> - 1, <I>Parity</I> - none; <I>serial port handshake</I> - <I>XON/XOFF</I> - off, <I>RTS-CTS</I> - on, <I>DSR-DTR</I> - on, <I>DCD</I> - off. <I>Note. You can't use PsiFtp and PsiPrn at the same time.</I> To stop PsiPrn, it's enough to press <I>Esc</I> on your keyboard.
+<P><B>PsiPrn environment variables.</B> PsiPrn accepts the same environment variables as PsiFtp does, but one extra variable - PSIJOBTIMEOUT=xxx - job time-out in seconds. It's necessary to separate one print job from another. Psion doesn't send any special command to perform this task, so it's only one way to resolve this issue - time-out. PsiPrn waits data from a Psion PSIJOBTIMEOUT seconds (and prints them on your printer if there are some), if no data arrived - job will be finished (not the PsiPrn). Default print job time-out is 15 seconds.
+<P><B>PsiPrn's command line arguments. </B>In the simple situations it's enough for you to start the command file <I>pprn.cmd.</I> If you are going to extend your using of PsiPrn you need to know how to start it with a command line arguments.
+<P><I>PsiPrn [-h] [-c:N] [-b:N] [-p:N] [j:N] [-l:nnn]</I>
+<P>Next parameters allow to arrange with communication environment :
+<P>	-c:N - serial port number, where N - 1,2...;
+<P>	-b:S - serial port speed, where S one these values - 300, 600, 1200, 2400, 4800, 			9600, 19200, 38400, 57600, 115200;
+<P>                   -p:N - printer port number, where N - 1,2.. (what means LPT1,LPT2...);
+<P>                   -j:N - print job time-out (sec);
+<P>	-s:N - the synonym for previous argument.
+<P>To show filenames content characters different from the standard English it's necessary to indicate the correct code page for Psion. Next parameter designed for this :
+<P>	-l:nnn - code page for Psion, where nnn is valid code page name (i.e. IBM-850, 		IBM-866 etc.).
+<P><B>PsiConv. Psion data conversion program.</B> This program is just a port from Linux. Original program is developing by Frodo Looijaard. The home page for this program is <I>http://huizen.dds.nl/~frodol/psiconv/index.html</I>. Current ported version is 0.8.1. There is the extraction from this page : <I>&quot;The current release of psiconv is psiconv-0.8.1. This is an early release, mostly tested on Linux/i386 (though it should now run on any Unix platform). It can translate Psion Word and TextEd files to HTML (either 3.2 or 4.0) or plain text, and it can translate Psion Sketch, MBM and ClipArt files to almost any graphic format. It is not yet perfect, but it can easily be extended. Psiconv-0.8.1 includes the description of the Psion file formats, version 2.6.&quot;</I> 
+<P>Here is a short description for the command line.
+<P><I>PsiConv [Options] [File]</I>
+<P>If <I>[File]</I> is not specified, stdin is used. Options are :
+<P>	-d, --debug 	- show debug information on stderr;
+<P>	-h, --help          - display this help and exit;
+<P>	-o, --output file  - output to file instead of stdout;
+<P>	-s, --silent         - do not even show warnings on stderr;
+<P>	-V, --version	 - display the program version and exit;
+<P>	-v, --verbose	- show progress indicators on stderr;
+<P>	-T, --type=FileType  - output file type;
+<P>I suggest you to use next output types:
+<P>	ASCII		plain text without much layout
+<P>	HTML3	HTML 3.2, not verified so probably not completely compliant
+<P>	HTML4	HTML 4.0 with cascading style sheets
+<P>	BMP		Microsoft Windows bitmap image
+<P>	BMP24	Microsoft Windows 24-bit bitmap image
+<P>	GIF		CompuServe graphics interchange format
+<P>	GIF87		CompuServe graphics interchange format (version 87a)
+<P>	JPEG or JPG	Joint Photographic Experts Group JFIF format
+<P>	PCX		ZSoft IBM PC Paintbrush
+<P>	PNG		Portable Network Graphics
+<P>	TIFF or TIF	Tagged Image File Format
+<P>	TEXT or TXT	Raw text
+<P>Example :	<I><U>D:\Psion&gt;</U>psiconv.exe MyPsionWordFile -o MyOS2file.html -T HTML4<U></U></I>
+<P><I><U></U></I><B>Development history. </B>
+<P><B>v1.5</B>	Print-server support was added. Now it is possible to use Psion's &quot;Print via PC&quot; feature.
+<P><B>v1.4</B>	Partial reconnection feature was added. New version of PsiConv (see PsiConv doc for improvements). Backup can now keep separated backups for devices with different serial-numbers. Backup adds serial number into the destination path (restore makes the same). Note. This feature doesn't work with Series 3 and similar (Sibo16), because they haven't ability to send their serial numbers. This feature can be turned off/on with a new command &quot;snumb off/on&quot;. Install feature was added. Now it's possible to install application remotely using .ctl files.
+<P><B>v1.3</B>	Improved performance (about 10-15%). Fixed some little bugs in RPC. RPC with my Sibo emulator is still unstable. If you are interested in RPC support for Sibo machines drop me a e-mail. Fixed error in the Rexx example for RPC.
+<P><B>v1.2</B>	Command line switch '-r' is added. For switching off RPC support for old Sibo machines (which haven't got SYS$RPCS.IMG properly installed. Consult your Psion User's manual for details). Rexx interface is released. Port of PsiConv wasn't changed, I'm waiting for RTF suppord released.
+<P><B>v1.1</B>	The project has a new additional author: Mike A. Potapoff. He's writing Rexx interface. Documetation for PsiFtp is now included into that package. Rexx interface is only preface version and is temporary removed for fixing bugs ...;-)
+<P><B>v1.1b</B> 	Some new commands added : 
+<P>	&quot;ps &lt;psidrive&gt;&quot; - get list of the running processes on Psion. For Psion older than Series 5 you should indicate a drive name from where programms were started.
+<P>	&quot;kill &lt;psdrive&gt; &lt;pid&gt;&quot; - kill selected process on Psion.
+<P>	&quot;run &lt;prog&gt; &lt;arg&gt;&quot; - run specified program on Psion with an argument.
+<P>            &quot;owner&quot;         - show Psion owner information.
+<P>            &quot;psion&quot;         - show Psion's information.
+<P>            &quot;synct&quot;         - synchronize Psion and your PC clocks.
+<P><B>v1.0</B> 	Some little changes. And one important thing - I've made psiftp engine compatible with Psion-plugin for NetDrive. Replaced psiconv with new one.
+<P><B>v0.97</B>  Some new commands were added. PsiPrn wasn't changed at all (yet). Directory &quot;Lib&quot; contains a library, some headers and an example for a Psion link.
+<P><B>v0.96</B>	Fix some little bugs. PsiConv wasn't updated.
+<P><B>v0.95</B>	Add system's events handler for a cleaner program exit. For the first time, I'm including the port of PsiConv utility by Frodo Looijaard &lt;frodol@dds.nl&gt;. For a while, this utility can convert Psion's Word files to ASCII, HTML and HTML v4.
+<P><B>v0.94</B>	Fix some little bugs and one great bug. But they weren't my.
+<P><B>v0.93</B>	Fix some little bugs. New commands were added.<B></B>
+<P><B>v0.92</B>	Backup/restore was added. Note : I have got a problem with &quot;set file date&quot; function on Psion Series 3 emulator (Y2K ?). I made workaround, but if you have got it too, let me know, please. Made a little modification in error response code (improved error detection).
+<P><B>v0.91</B>	First public release.
+<P><B>Credits:</B>
+<P>Olaf Flebbe &lt;o.flebbe@science-computing.de&gt;
+<P>Philip Proudman &lt;philip.proudman@btinternet.com&gt;
+<P>Alexander Thoukydides &lt;alex@thouky.co.uk&gt;
+<P>Erik Huelsmann &lt;f.w.h.hulsmann@rcondw.rug.nl&gt;
+<P>Hans Hockx &lt;jcm.hockx@hccnet.nl&gt;
+<P>Frodo Looijaard &lt;frodol@dds.nl&gt;
+<P>            Peter Wansch &lt;p.wansch@ieee.org&gt; for a PrintQ library.
+<P>
+</UL>
+
+
+</BODY>
+
+</HTML>

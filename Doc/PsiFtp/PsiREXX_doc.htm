@@ -1,0 +1,338 @@
+<HTML>
+<HEAD>
+<META Name="Generator" Content="Lotus Word Pro"></META>
+<TITLE>Body</TITLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+
+<P ALIGN="CENTER"><FONT SIZE="4"><B>Psion REXX interface API.</B></FONT>
+<P>At the moment there exist two ways for Psion to OS/2 connection which we've done : PsiFtp utility and Psion-plugin for NetDrive. Both of them use common link engine and supply basic file manipulation features. On my opinion it's not enough for comfortable work with a Psion. There is lack of conversion utilities and probably lack of functionality for independent projects. So we decided to create a REXX interface for the Psion link engine. In this document you can find quite comprehensive descriptions for each of designed routines.
+<P>Note. Current version of the Psion link engine doesn't support concurrent job for one Psion device for Psion-plugin (or PsiFtp) and REXX interface. You can't call any of REXX routines while Psion plugin is connected or PsiFtp started, and visa versa.
+<P>First of all. Psion link engine is a single dynamic-link library (DLL) - file psilib.dll, versions 1.2 and higher (look correspondent version either for PsiFtp or for Psion-plugin) content REXX interface. Here and below I admit that you have basic knowledge about external routines calling in REXX. There are different ways to load and initialise functions from psilib.dll.
+	<UL TYPE="disc">
+		<LI>You can copy it into the directory which name contents in the LIBPATH variable in your CONFIG.SYS. And then call :
+	</UL>
+<FONT  FACE="Courier">CALL RxFuncAdd 'prxInit', 'psilib.dll', 'prxInit'</FONT>
+<P><FONT  FACE="Courier">CALL prxInit</FONT>
+	<UL TYPE="disc">
+		<LI><FONT  FACE="Courier"></FONT>Or you put this DLL-file anywhere you want and add the name of the directory it resides to LIBPATH variable. And then perform described above code.
+		<LI>Or you can do that following way :
+	</UL>
+<FONT  FACE="Courier">'@SET BEGINLIBPATH=C:\NDFS\ndplugs'</FONT>
+<P><FONT  FACE="Courier">CALL RxFuncAdd 'prxInit', 'psilib.dll', 'prxInit'</FONT>
+<P><FONT  FACE="Courier">CALL prxInit</FONT>
+<P>After one of those steps REXX interface ready to use.
+<P>All functions return status code (error code), except cases when they return information. You have to analyse it to be aware that everything is OK. All possible error codes listed below.
+<P><FONT  FACE="Courier">RET_OK              =  0</FONT>
+<P><FONT  FACE="Courier">RET_NOT_CONNECTED   = -1</FONT>
+<P><FONT  FACE="Courier">RET_NOT_ENOUGH_MEM  = -2</FONT>
+<P><FONT  FACE="Courier">RET_ALREADY_RUNNED  = -3</FONT>
+<P><FONT  FACE="Courier">RET_RUN_TIMEOUT     = -4</FONT>
+<P><FONT  FACE="Courier">RET_NO_SUCH_PROCESS = -5</FONT>
+<P><FONT  FACE="Courier">RET_CANT_CREATE_DIR = -7</FONT>
+<P><FONT  FACE="Courier">RET_CANT_DELETE_DIR = -8</FONT>
+<P><FONT  FACE="Courier">RET_CANT_DELETE     = -9</FONT>
+<P><FONT  FACE="Courier">RET_CANT_GET_FILE   = -10</FONT>
+<P><FONT  FACE="Courier">RET_CANT_PUT_FILE   = -11</FONT>
+<P><FONT  FACE="Courier"></FONT>Note : in case of severe and non-recoverable error REXX terminates with a one of standard code, consult REXX manual for additional information.
+<P>All routines could be divided into several groups :
+<OL>
+	<LI>Working environment initialisation and control functions.
+	<LI>Psion connection control functions.
+	<LI>Psion informative functions.
+	<LI>Psion processes control functions (kind of RPC interface).
+	<LI>Psion files/directories manipulation functions.
+<P ALIGN="CENTER"><B>Working environment initialisation and control group.</B>
+<P><B></B>There are two functions in this group :
+<P><I>prxInit [(MaxProc,MaxWait)]</I>
+<P>Description : Initialises working environment for other Psion interface REXX procedures. It registers them, creates all necessary buffers etc. 
+<P>Parameters : It has two optional parameters : 
+<P>MaxProc - maximum number of processes on Psion (Process list size). Default it is 32. If your Psion is rather heavily loaded you should increase that up to appropriate value.
+<P>MaxWait - time in seconds, process start and termination latency time. Default it is 30 sec. If your Psion is heavily loaded or you use big programs on it, you should increase this parameter. If this timeout is exceeded and process control routine doesn't find its action finished it will return RET_RUN_TIMEOUT.
+<P>Return values : RET_OK, RET_NOT_ENOUGH_MEM
+<P>Example : <FONT  FACE="Courier">CALL prxInit ( 64, 20 )</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxQuit</I>
+<P>Description : De-registers all other functions, frees all allocated memory, perhaps finishes a connection if there is any exists.
+<P>Parameters : None.
+<P>Return values : RET_OK
+<P>Example : <FONT  FACE="Courier">CALL prxQuit</FONT>
+<P ALIGN="CENTER"><FONT  FACE="Courier"></FONT><B>Psion connection control functions.</B>
+<P><I>prxConnect ([PortName,ComBaud,PsionLocale,startRPC])</I>
+<P>Description : Establishes a new connection with a Psion on the selected port, with a selected baud rate. It closes previously created connection is it was any.
+<P>Parameters : All parameters are optional.
+<P>PortName text string like &quot;COM1&quot;, &quot;COM2&quot;, etc. If next parameters are needed, use empty string (&quot;&quot;)
+<P>ComBaud number up to 115200 (from standard set of COM port bauds)
+<P>PsionLocale text string, for example, &quot;IBM-866&quot; (from the standard set of Locale names, consult your OS/2 User manual for that).
+<P>startRPC number 0 - means don't start RPC service if you haven't such on your Psion (for old models), 1 or omitted - means start RPC connection. By default Psion-engine always starts RPC service.
+<P>Note. There are some conventions for parameters. If any parameter is omitted, it will be taken from the correspondent environment variable. If such variable wasn't defined, function uses default value.
+<P>
+<TABLE BORDER="2" BORDERCOLOR="#000000" CELLPADDING="3" WIDTH="600">
+	<TR>
+		<TD WIDTH="33%" ALIGN="LEFT" VALIGN="TOP">Parameter</TD>
+		<TD WIDTH="33%" ALIGN="LEFT" VALIGN="TOP">Environment Variable</TD>
+		<TD WIDTH="33%" ALIGN="LEFT" VALIGN="TOP">Default Value</TD></TR>
+
+	<TR>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PortName</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PSICOM</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">COM2</TD></TR>
+
+	<TR>
+		<TD  ALIGN="LEFT" VALIGN="TOP">ComBaud</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PSIBAUD</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP"><P ALIGN="LEFT">115 200</TD></TR>
+
+	<TR>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PsionLocale</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PSICP</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">IBM-1251</TD></TR>
+
+</TABLE>
+
+<P>Return values : RET_OK, RET_NOT_CONNECTED
+<P>Example : <FONT  FACE="Courier">CALL prxConnect ( &quot;COM1&quot;, 38400 )</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxDisconnect</I>
+<P>Description: The function closes the existing connection to Psion (if any).
+<P>Parameters: None
+<P>Return values: RET_OK
+<P>Example: <FONT  FACE="Courier">CALL prxDisconnect</FONT>
+<P ALIGN="CENTER"><FONT  FACE="Courier"></FONT><B>Psion informative functions.</B>
+<P>Note. All of those functions base on RPC service. So if you don't have it started, informative functions won't work.
+<P><I>prxPsionVersion</I>
+<P>Description: Returns the version for connected Psion.
+<P>Parameters: None
+<P>Return values: text string - Psion's version or RET_NOT_CONNECTED.
+<P>Example:  <FONT  FACE="Courier">SAY &quot;Version = &quot; prxPsionVersion()</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxPsionOwner</I>
+<P>Description: Returns the owner's name of your :-) Psion.
+<P>Parameters: None
+<P>Return values: Psion's owner credentials, text strings, separated by LineFeed or RET_NOT_CONNECTED
+<P>Example: <FONT  FACE="Courier">SAY &quot;Owner: &quot; prxPsionOwner()</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxPsionType</I>
+<P>Description: Returns the Psion's type.
+<P>Parameters: None
+<P>Return values: Psion's machine type, number from the table below or RET_NOT_CONNECTED
+<P>
+<TABLE BORDER="1" BORDERCOLOR="#000000" CELLSPACING="0" CELLPADDING="5" WIDTH="623">
+	<TR>
+		<TD WIDTH="8%" ALIGN="LEFT" VALIGN="TOP">Code</TD>
+		<TD WIDTH="25%" ALIGN="LEFT" VALIGN="TOP">Machine type</TD>
+		<TD WIDTH="8%" ALIGN="LEFT" VALIGN="TOP">Code</TD>
+		<TD WIDTH="23%" ALIGN="LEFT" VALIGN="TOP">Machine type</TD>
+		<TD WIDTH="8%" ALIGN="LEFT" VALIGN="TOP">Code</TD>
+		<TD WIDTH="26%" ALIGN="LEFT" VALIGN="TOP">Machine type</TD></TR>
+
+	<TR>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">0</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Unknown</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">4</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Series 3</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">8</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Series 3c</TD></TR>
+
+	<TR>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">1</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">PC</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">5</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Series 3a, 3x, 3Mx</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">32</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Series 5</TD></TR>
+
+	<TR>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">2</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">MC</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">6</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Workabout</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">33</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">WinC</TD></TR>
+
+	<TR>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">3</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">HC</TD>
+		<TD  ALIGN="RIGHT" VALIGN="TOP">7</TD>
+		<TD  ALIGN="LEFT" VALIGN="TOP">Sienna</TD>		<TD>&nbsp;</TD>		<TD>&nbsp;</TD></TR>
+
+</TABLE>
+
+<P>Example: <FONT  FACE="Courier">SAY &quot;Psion's Type: &quot; prxPsionType()</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxPsionParameters (Info)</I>
+<P>Description: Returns information about Psion, stored as a stem. Note stem is a standard method to gain an access to the structure fields from within REXX (See REXX Reference for details).
+<P>Parameters: this single parameter is Info mandatory, text string with the stem name, where information will be stored to. Upon return 'Info'.0 contains parameters number, when 'Info'.i contains i parameter's name and parameter value is placed in 'Info'.ParamName. See example below for details.
+<P>Return values: parameters number or RET_NOT_CONNECTED
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxPsionParameters  &quot;Param&quot;</FONT>
+<P><FONT  FACE="Courier">SAY &quot;Total Parameters: &quot; Param.0</FONT>
+<P><FONT  FACE="Courier">SAY &quot;MachineType:   &quot; Param.MachineType</FONT>
+<P><FONT  FACE="Courier">SAY &quot;ROMversion:    &quot; Param.ROMversion</FONT>
+<P><FONT  FACE="Courier">SAY &quot;ROMbuilt:      &quot; Param.ROMbuilt</FONT>
+<P><FONT  FACE="Courier">SAY &quot;MachineName:   &quot; Param.MachineName</FONT>
+<P><FONT  FACE="Courier">SAY &quot;DisplayWidth:  &quot; Param.DisplayWidth</FONT>
+<P><FONT  FACE="Courier">SAY &quot;DisplayHeight: &quot; Param.DisplayHeight</FONT>
+<P><FONT  FACE="Courier">SAY &quot;MachineUID:    &quot; Param.MachineUID</FONT>
+<P><FONT  FACE="Courier">SAY &quot;Time:          &quot; Param.Time</FONT>
+<P><FONT  FACE="Courier">SAY &quot;RAMsize:       &quot; Param.RAMsize</FONT>
+<P><FONT  FACE="Courier">SAY &quot;ROMsize:       &quot; Param.ROMsize</FONT>
+<P><FONT  FACE="Courier">SAY &quot;RAMmaxFree:    &quot; Param.RAMmaxFree</FONT>
+<P><FONT  FACE="Courier">SAY &quot;RAMfree:       &quot; Param.RAMfree</FONT>
+<P><FONT  FACE="Courier">SAY &quot;RAMdiskSize:   &quot; Param.RAMdiskSize</FONT>
+<P><FONT  FACE="Courier">SAY &quot;Language:      &quot; Param.Language</FONT>
+<P ALIGN="CENTER"><B>Psion processes control functions.</B>
+<P>This group allows user to run, track and terminate tasks on Psion. Note. All of those functions base on RPC service. So if you don't have it started, process control functions won't work.
+<P><I>prxTaskStart(ProcName [, ProcArgs, PID])</I>
+<P>Description: Asks Psion to open file and run associated with it application or simply run a task by its name. If third parameter is presented, waits until the task starts and then returns Process ID, else exits without waiting.
+<P>Parameters:
+<P>ProcName is a mandatory parameter - text string, full path (including drive letter) to a program filename to run or full filename of an application data file;
+<P>ProcArgs  is an optional parameter - text string, task's parameters space separated;
+<P>PID optional, text string, contains variable's name to return Process ID to. When is present, returns PID although function returns RET_ALREADY_RUNNED;
+<P>Return values: RET_OK, RET_NOT_CONNECTED, RET_ALREADY_RUNNED, RET_NO_SUCH_PROCESS, RET_RUN_TIMEOUT
+<P>Example:
+<P><FONT  FACE="Courier">rc = prxTaskStart(&quot;C:\Documents\Sheet&quot;, &quot;&quot;, &quot;ID1&quot;) </FONT>
+<P><FONT  FACE="Courier">SAY &quot;PID for file 'Sheet' = &quot; ID1 </FONT>
+<P><FONT  FACE="Courier">rc = prxTaskStart(&quot;Z:\System\Apps\Word\Word.app&quot;, &quot;&quot;, &quot;ID2&quot;) SAY &quot;Word's PID = &quot; ID2</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxTaskIsRunning(Task</I> [, PID])
+<P>Description: Tests if given task is running on Psion.
+<P>Parameters:                
+<P>ProcName is a mandatory parameter, text string, PID or full path to file opened or running.
+<P>PID optional, text string, contains variable's name to return Process ID to. When is present, function returns PID for selected task.
+<P>Return values: RET_OK, RET_NOT_CONNECTED, RET_NO_SUCH_PROCESS
+<P>Example:
+<P><FONT  FACE="Courier">IF prxTaskIsRunning(Name, 'ID') == RET_NO_SUCH_PROCESS THEN </FONT>
+<P><FONT  FACE="Courier">SAY 'No Such Task' </FONT>
+<P><FONT  FACE="Courier">ELSE </FONT>
+<P><FONT  FACE="Courier">SAY &quot;Task's PID = &quot; ID</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxTaskList (PIDList [, FileList])</I>
+<P>Description: Gets the list of process IDs (tasks running) and/or the list of files opened and associated with applications.
+<P>Parameters:
+<P>PIDList is mandatory parameter, text string, stem's name to return the Process IDs to. Upon returning &quot;PIDList&quot;.0 contains PIDs number.
+<P>FileList optional, when is presented, gives the stem's name as a text string to return the Task Names to. Upon returning &quot;FileList&quot;.0 contains Files number.
+<P>Return values: RET_OK, RET_NOT_CONNECTED
+<P>Example:
+<P><FONT  FACE="Courier">rc = prxTaskList(&quot;Tasks&quot;)</FONT>
+<P><FONT  FACE="Courier">SAY 'Total Tasks running:' Tasks.0</FONT>
+<P><FONT  FACE="Courier">SAY 'Task List'</FONT>
+<P><FONT  FACE="Courier">DO i = 1 to Tasks.0</FONT>
+<P><FONT  FACE="Courier">SAY Tasks.i</FONT>
+<P><FONT  FACE="Courier">END</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxTaskKill(ProcName [, Flag])</I>
+<P>Description: Asks Psion to terminate the task by its PID or filename. If Flag is presented function waits for ending of the process, else exits without waiting.
+<P>Parameters:
+<P>ProcName is a mandatory parameter, text string, full path to task PID to kill or to filename;
+<P>Flag optional, when exists tell function to wait until task ends.
+<P>Return values: RET_OK, RET_NOT_CONNECTED, RET_NO_SUCH_PROCESS, RET_RUN_TIMEOUT.
+<P>Example:
+<P><FONT  FACE="Courier">rc = prxTaskKill</FONT>(ID)
+<P><I>prxTaskKillX (PIDmask [, Flag])</I>
+<P>Description: Asks Psion to terminate all the tasks which names begin with PIDmask. If Flag is presented function waits for ending of the process, else exits without waiting.
+<P>Parameters:
+<P>PIDmask mandatory, text string, mask for PIDs to kill, 
+<P>Flag optional, when exists tells function wait until task ends.
+<P>Return Values: RET_OK, RET_NOT_CONNECTED, RET_NO_SUCH_PROCESS, RET_RUN_TIMEOUT
+<P>Example:
+<P><FONT  FACE="Courier">rc = prxTaskKillX('Word')</FONT>
+<P ALIGN="CENTER"><B>Psion files/directories manipulation functions.</B>
+<P>Common notes for all file manipulation routines. If file name is not a full file name including directory name functions are assured that file resides on the current path. Functions perform all necessary name conversions considered to code pages on their own.
+<P><I>prxPWD</I>
+<P>Description: Gets a current working path on Psion.
+<P>Parameters: None
+<P>Return values: test string - full name on current path on Psion.
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'Current Dir:' prxPWD()</FONT>
+<P><I>prxCD (DirName</I>)
+<P>Description: Sets new current path on Psion.
+<P>Parameters:
+<P>DirName is a mandatory parameter, text string, new path on Psion.
+<P>Return values: RET_OK, RET_NO_SUCH_DIR
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxCD('D:\Documents')</FONT>
+<P><I>prxMD (DirName)</I>
+<P>Description: Creates new directory on Psion. Note. Current version can't create directories recursively.
+<P>Parameters:
+<P>DirName is a mandatory parameter, text string, name of a directory to create on Psion.
+<P>Return values: RET_OK, RET_CANT_CREATE_DIR
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxMD('D:\MyDocuments')</FONT>
+<P><I>prxRD (DirName)</I>
+<P>Description: Removes directory on Psion. Note. Current version can't delete directories recursively.
+<P>Parameters:
+<P>DirName is a mandatory parameter, text string, name of a directory to create on Psion.
+<P>Return values: RET_OK, RET_CANT_DELETE_DIR
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxRD('D:\MyDocuments')</FONT>
+<P><I>prxFileList(List, [DirMask])</I>
+<P>Description: Returns directory content on DirMask.
+<P>Parameters:
+<P>List is mandatory parameter, text string, stem's name to return the list of files. Upon returning &quot;List&quot;.0 contains total number of files in list. Each item looks like this line :
+<P><FONT  FACE="Courier">&quot;Welcome to Series 5                  12688 08/06/1997&quot;</FONT>
+<P><FONT  FACE="Courier"></FONT>DirMaskis an optional parameter, text string, file mask to list files. If it is omitted, function returns list of files for current directory on Psion.
+<P>Return values: RET_OK, RET_NO_SUCH_DIR.
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxFileList 'Dr', s</FONT>
+<P><FONT  FACE="Courier">SAY 'Files in dir ' s </FONT>
+<P><FONT  FACE="Courier">DO i = 1 to Dr.0 by 1</FONT>
+<P><FONT  FACE="Courier">SAY Dr.i</FONT>
+<P><FONT  FACE="Courier">END</FONT>
+<P><FONT  FACE="Courier"></FONT><I>prxDel(FileName)</I>
+<P>Description: Deletes indicated file on Psion.
+<P>Parameters:
+<P>FileName is a mandatory parameter, text string, name of the file to delete. Note. Current version can't delete file with attribute &quot;Read-Only&quot; set.
+<P>Return values: RET_OK,RET_CANT_DELETE.
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'rc =' prxDel(&quot;C:\MyDocumets\Agenda&quot;)</FONT>
+<P><I>prxRen(OldName,NewName)</I>
+<P>Description: Renames indicated file on Psion from OldName to NewName.
+<P>Parameters:
+<P>OldName is a mandatory parameter, text string, name of the file to rename from.
+<P>NewName is a mandatory parameter, text string, name of the file to rename to.
+<P>Return values: RET_OK,RET_CANT_RENAME
+<P>Example:
+<P><FONT  FACE="Courier">CALL prxRen(&quot;C:\Agenda&quot;,&quot;C:\MyDocumets\CurrentAgenda&quot;)</FONT>
+<P><I>prxGet(PsionFileName,PCFileName)</I>
+<P>Description: copies one file from Psion to PC.
+<P>Parameters:
+<P>PsionFileName is a mandatory parameter, text string, name of the Psion file to copy from.
+<P>PCFileName is a mandatory parameter, text string, name of the PC file to copy to.
+<P>Return values: RET_OK,RET_CANT_GET_FILE
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'rc =' prxGet(&quot;D:\Docs\ImportantNote&quot;,&quot;C:\APPS\File1&quot;)</FONT>
+<P><I>prxPut(PCFileName,PsionFileName)</I>
+<P>Description: copies one file from PC to Psion.
+<P>Parameters:
+<P>PCFileName is a mandatory parameter, text string, name of the PC file to copy from.
+<P>PsionFileName is a mandatory parameter, text string, name of the Psion file to copy to.
+<P>Return values: RET_OK,RET_CANT_PUT_FILE.
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'rc =' prxPut(&quot;C:\APPS\File1&quot;,&quot;D:\Docs\ImportantNote&quot;)</FONT>
+<P><I>prxGetFileInfo(FileName)</I>
+<P>Description: Reads Psion file attributes as a text string consists of letter for each corresponding attribute or '-'. For example 'RH--A--' or '----A---'. In first case file has &quot;Read-Only&quot;, &quot;Hidden&quot; and &quot;Archived&quot; attributes. In second case file has only one &quot;Archived&quot; attribute.
+<P>Parameters:
+<P>FileName is a mandatory parameter, text string, name of the file to read attributes.
+<P>Return values: RET_OK,RET_CANT_GETATTR.
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'Attributes for ' d 'is ' prxGetFileInfo(d)</FONT>
+<P><I>prxSetFileInfo(FileName,Attributes)</I>
+<P>Description: Sets Psion file attributes.
+<P>Parameters:
+<P>FileName is a mandatory parameter, text string, name of the file to set attributes for.
+<P>Attributes is a mandatory parameter, text string consists of letters for attributes to set or remove. List of available :
+<P>R - read-only
+<P>H - hidden
+<P>S - system
+<P>A - archived
+<P>To set an attributes you should add before the corresponded letter '+'. To remove an attributes you should add before the letter '-' (See example).
+<P>Return values: RET_OK,RET_CANT_SETATTR.
+<P>Example:
+<P><FONT  FACE="Courier">SAY 'rc =' prxSetFileInfo(&quot;D:\Documents\Word&quot;,&quot;+R-H&quot;)</FONT>
+<P><FONT  FACE="Courier"></FONT>Complete example of using those procedures you can find in the PsiFtp distributive. There are two files included : psiREXXfile.cmd and psiREXXproc.cmd.
+<P>I dare say that is all. If you have any suggestions or remarks, you are welcome.
+<P>(C) 2001 Andrei A. Porodko &lt;porro@cbs-edu.chel.su&gt;
+<P>Mike A. Potapoff &lt;mike@cbs-edu.chel.su&gt;
+<P>
+</OL>
+
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,25 @@
+Data formats:
+* Understand the password section
+* Understand and document other file types (Data, Sheet, Agenda, etc)
+
+Parser:
+* Incorporate the replacement section. Stubs are already in place.
+* Add additional file types.
+* Add included objects
+
+Generator:
+* Add image support
+
+Psiconv Generators:
+* HTML: Verify generated code, to see whether it is HTML-3.2 compatible
+* HTML4: Fallback on normal HTML for TextEd files might be replaced with
+         true code. But is it worth it?
+* RTF: Make it usable. Not nearly finished at the moment.
+* IMAGE: support for special things like clipping is still lacking at the
+         generator side. 
+
+General:
+* Many common values are returned as int. Perhaps change this to long,
+  for better behaviour on very large files on some architectures?
+* Use libaudiofile for audio conversions?
+* Add generation of audio files.

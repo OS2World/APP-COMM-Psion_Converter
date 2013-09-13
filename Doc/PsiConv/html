@@ -1,0 +1,8 @@
+This is the basic psiconv generator. It generates plain HTML that should be
+readable on any HTML-3.2 compliant browser (at this moment, a few codes are
+probably unknown; one of the next versions will have completely validated
+HTML-3.2 output).
+
+Note that tabs, headers and footers are not rendered at all. Especially
+the omission of tabs can cause ugly layouts. Unfortunately, there is not
+a real solution for this.

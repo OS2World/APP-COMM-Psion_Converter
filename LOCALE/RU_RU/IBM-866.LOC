@@ -1,0 +1,577 @@
+#######################################################################
+#   IBM LOCALE REPOSITORY : SUBMISSION - LOCALE VERIFICATION          #
+#######################################################################
+#######################################################################
+#  Locale Name   : ru_RU             Date Submitted: 10-November-94   #
+#  Country/Region: Russia                                             #
+#  Language(s)   : Russian                                            #
+#                                                                     #
+#######################################################################
+#  Approval Status:  __ Approved as National Standard                 #
+#                    __ Pending National Standards Approval           #
+#                    __ de facto Standard                             #
+#                    xx Other (describe) - Shipped with               #
+#                       OS/2 Developer's Connection CDROM             #
+#######################################################################
+#  Pedigree:  Origin: AIX 3.2 Country Specific Solution               #
+#                                                                     #
+#             Modification: For  866 codepage support                 #
+#                                                                     #
+#######################################################################
+#                 H/W Platform     OS Version/Level    Using Charmap  #
+#                 -------------    ----------------    -------------  #
+#  Successfully ) PS/2             OS/2 2.1            IBM-866        #
+#  compiled on: ) x                x                   x              #
+#               ) x                x                   x              #
+#                                                                     #
+#  NOTES:                                                             #
+#                                                                     #
+#######################################################################
+#  Submitted by -  Name: Joe Ross                                     #
+#                  VNET: JOEROSS at AUSTIN                            #
+#              Internet: ross@austin.ibm.com                          #
+#             Telephone: 8-678-7868                                   #
+#                   Fax: n/a                                          #
+#        Street Address: 11400 Burnett Road, Austin, Texas 78578.     #
+#                                                                     #
+#######################################################################
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1991
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale Source for ru_RU.IBM-866 locale                             #
+######################################################################
+
+
+#############
+LC_CTYPE
+#############
+
+upper   <A>;...;<Z>;\
+        <cyr-IO>;\
+        <ukrainian-IE>;\
+        <ukrainian-YI>;\
+        <byelorussian-SHORTU>;\
+        <cyr-A>;\
+        <cyr-BE>;\
+        <cyr-VE>;\
+        <cyr-GHE>;\
+        <cyr-DE>;\
+        <cyr-IE>;\
+        <cyr-ZHE>;\
+        <cyr-ZE>;\
+        <cyr-I>;\
+        <cyr-SHORTI>;\
+        <cyr-KA>;\
+        <cyr-EL>;\
+        <cyr-EM>;\
+        <cyr-EN>;\
+        <cyr-O>;\
+        <cyr-PE>;\
+        <cyr-ER>;\
+        <cyr-ES>;\
+        <cyr-TE>;\
+        <cyr-U>;\
+        <cyr-EF>;\
+        <cyr-HA>;\
+        <cyr-TSE>;\
+        <cyr-CHE>;\
+        <cyr-SHA>;\
+        <cyr-SHCHA>;\
+        <HARDSIGN>;\
+        <cyr-YERU>;\
+        <SOFTSIGN>;\
+        <cyr-E>;\
+        <cyr-YU>;\
+        <cyr-YA>
+
+lower   <a>;...;<z>;\
+        <cyr-io>;\
+        <ukrainian-ie>;\
+        <ukrainian-yi>;\
+        <byelorussian-shortu>;\
+        <cyr-a>;\
+        <cyr-be>;\
+        <cyr-ve>;\
+        <cyr-ghe>;\
+        <cyr-de>;\
+        <cyr-ie>;\
+        <cyr-zhe>;\
+        <cyr-ze>;\
+        <cyr-i>;\
+        <cyr-shorti>;\
+        <cyr-ka>;\
+        <cyr-el>;\
+        <cyr-em>;\
+        <cyr-en>;\
+        <cyr-o>;\
+        <cyr-pe>;\
+        <cyr-er>;\
+        <cyr-es>;\
+        <cyr-te>;\
+        <cyr-u>;\
+        <cyr-ef>;\
+        <cyr-ha>;\
+        <cyr-tse>;\
+        <cyr-che>;\
+        <cyr-sha>;\
+        <cyr-shcha>;\
+        <hardsign>;\
+        <cyr-yeru>;\
+        <softsign>;\
+        <cyr-e>;\
+        <cyr-yu>;\
+        <cyr-ya>
+
+space   <tab>;\
+        <newline>;\
+        <vertical-tab>;\
+        <form-feed>;\
+        <carriage-return>;\
+        <space>
+
+cntrl   <NUL>;...;<IS1>;\
+        <DEL>
+
+graph   <exclamation-mark>;...;<tilde>;\
+        <cyr-A>;...;<nobreakspace>
+
+print   <space>;...;<tilde>;\
+        <cyr-A>;...;<nobreakspace>
+
+punct   <exclamation-mark>;...;<slash>;\
+        <colon>;...;<commercial-at>;\
+        <left-square-bracket>;...;<grave-accent>;\
+        <left-brace>;...;<tilde>
+
+digit   <zero>;...;<nine>
+
+xdigit  <zero>;...;<nine>;\
+        <A>;...;<F>;\
+        <a>;...;<f>
+
+blank   <space>;\
+        <tab>
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>);\
+        (<cyr-a>,<cyr-A>);\
+        (<cyr-be>,<cyr-BE>);\
+        (<cyr-ve>,<cyr-VE>);\
+        (<cyr-ghe>,<cyr-GHE>);\
+        (<cyr-de>,<cyr-DE>);\
+        (<cyr-ie>,<cyr-IE>);\
+        (<cyr-zhe>,<cyr-ZHE>);\
+        (<cyr-ze>,<cyr-ZE>);\
+        (<cyr-i>,<cyr-I>);\
+        (<cyr-shorti>,<cyr-SHORTI>);\
+        (<cyr-ka>,<cyr-KA>);\
+        (<cyr-el>,<cyr-EL>);\
+        (<cyr-em>,<cyr-EM>);\
+        (<cyr-en>,<cyr-EN>);\
+        (<cyr-o>,<cyr-O>);\
+        (<cyr-pe>,<cyr-PE>);\
+        (<cyr-er>,<cyr-ER>);\
+        (<cyr-es>,<cyr-ES>);\
+        (<cyr-te>,<cyr-TE>);\
+        (<cyr-u>,<cyr-U>);\
+        (<cyr-ef>,<cyr-EF>);\
+        (<cyr-ha>,<cyr-HA>);\
+        (<cyr-tse>,<cyr-TSE>);\
+        (<cyr-che>,<cyr-CHE>);\
+        (<cyr-sha>,<cyr-SHA>);\
+        (<cyr-shcha>,<cyr-SHCHA>);\
+        (<hardsign>,<HARDSIGN>);\
+        (<cyr-yeru>,<cyr-YERU>);\
+        (<softsign>,<SOFTSIGN>);\
+        (<cyr-e>,<cyr-E>);\
+        (<cyr-yu>,<cyr-YU>);\
+        (<cyr-ya>,<cyr-YA>)
+
+END LC_CTYPE
+
+
+#############
+LC_COLLATE
+#############
+
+
+order_start             forward;forward;forward
+<NUL>
+<SOH>
+<STX>
+<ETX>
+<EOT>
+<ENQ>
+<ACK>
+<alert>
+<backspace>
+<tab>
+<newline>
+<vertical-tab>
+<form-feed>
+<carriage-return>
+<SO>
+<SI>
+<DLE>
+<DC1>
+<DC2>
+<DC3>
+<DC4>
+<NAK>
+<SYN>
+<ETB>
+<CAN>
+<EM>
+<SUB>
+<ESC>
+<IS4>
+<IS3>
+<IS2>
+<IS1>
+<DEL>
+<space>                 <space>;<space>;<space>
+<exclamation-mark>      <exclamation-mark>;<exclamation-mark>;<exclamation-mark>
+<quotation-mark>        <quotation-mark>;<quotation-mark>;<quotation-mark>
+<number-sign>           <number-sign>;<number-sign>;<number-sign>
+<dollar-sign>           <dollar-sign>;<dollar-sign>;<dollar-sign>
+<percent-sign>          <percent-sign>;<percent-sign>;<percent-sign>
+<ampersand>             <ampersand>;<ampersand>;<ampersand>
+<apostrophe>            <apostrophe>;<apostrophe>;<apostrophe>
+<left-parenthesis>      <left-parenthesis>;<left-parenthesis>;<left-parenthesis>
+<right-parenthesis>     <right-parenthesis>;<right-parenthesis>;<right-parenthesis>
+<asterisk>              <asterisk>;<asterisk>;<asterisk>
+<plus-sign>             <plus-sign>;<plus-sign>;<plus-sign>
+<comma>                 <comma>;<comma>;<comma>
+<hyphen>                <hyphen>;<hyphen>;<hyphen>
+<period>                <period>;<period>;<period>
+<slash>                 <slash>;<slash>;<slash>
+<colon>                 <colon>;<colon>;<colon>
+<semicolon>             <semicolon>;<semicolon>;<semicolon>
+<less-than-sign>        <less-than-sign>;<less-than-sign>;<less-than-sign>
+<equals-sign>           <equals-sign>;<equals-sign>;<equals-sign>
+<greater-than-sign>     <greater-than-sign>;<greater-than-sign>;<greater-than-sign>
+<question-mark>         <question-mark>;<question-mark>;<question-mark>
+<commercial-at>         <commercial-at>;<commercial-at>;<commercial-at>
+<left-square-bracket>   <left-square-bracket>;<left-square-bracket>;<left-square-bracket>
+<backslash>             <backslash>;<backslash>;<backslash>
+<right-square-bracket>  <right-square-bracket>;<right-square-bracket>;<right-square-bracket>
+<circumflex-accent>     <circumflex-accent>;<circumflex-accent>;<circumflex-accent>
+<underscore>            <underscore>;<underscore>;<underscore>
+<grave-accent>          <grave-accent>;<grave-accent>;<grave-accent>
+<left-brace>            <left-brace>;<left-brace>;<left-brace>
+<vertical-line>         <vertical-line>;<vertical-line>;<vertical-line>
+<right-brace>           <right-brace>;<right-brace>;<right-brace>
+<tilde>                 <tilde>;<tilde>;<tilde>
+<numero-sign>           <numero-sign>;<numero-sign>;<numero-sign>
+<nobreakspace>          <nobreakspace>;<nobreakspace>;<nobreakspace>
+<degree>
+<dot>
+<square-root>
+<currency>
+<boxfill-dark>
+<boxfill-medium>
+<boxfill-light>
+<box-vertical>
+<box-int-right>
+<box-vert-sngl-left-dbl>
+<box-vert-dbl-left-sngl>
+<box-down-dbl-left-sngl>
+<box-down-sngl-left-dbl>
+<doublebox-int-right>
+<doublebox-vertical>
+<doublebox-top-right>
+<doublebox-bottom-right>
+<box-up-dbl-left-sngl>
+<box-up-sngl-left-dbl>
+<box-top-right>
+<box-bottom-left>
+<box-int-bottom>
+<box-int-top>
+<box-int-left>
+<box-horizontal>
+<box-intersection>
+<box-vert-sngl-right-dbl>
+<box-vert-dbl-right-sngl>
+<doublebox-bottom-left>
+<doublebox-top-left>
+<doublebox-int-bottom>
+<doublebox-int-top>
+<doublebox-int-left>
+<doublebox-horizontal>
+<doublebox-intersection>
+<box-up-sngl-horiz-dbl>
+<box-up-dbl-horiz-sngl>
+<box-down-sngl-horiz-dbl>
+<box-down-dbl-horiz-sngl>
+<box-up-dbl-right-sngl>
+<box-up-sngl-right-dbl>
+<box-down-sngl-right-dbl>
+<box-down-dbl-right-sngl>
+<box-vert-dbl-horiz-sngl>
+<box-vert-sngl-horiz-dbl>
+<box-bottom-right>
+<box-top-left>
+<boxfill>
+<boxfill-bottom>
+<boxfill-left>
+<boxfill-right>
+<boxfill-top>
+<boxfill-middle>
+<zero>                  <zero>;<zero>;<zero>
+<one>                   <one>;<one>;<one>
+<two>                   <two>;<two>;<two>
+<three>                 <three>;<three>;<three>
+<four>                  <four>;<four>;<four>
+<five>                  <five>;<five>;<five>
+<six>                   <six>;<six>;<six>
+<seven>                 <seven>;<seven>;<seven>
+<eight>                 <eight>;<eight>;<eight>
+<nine>                  <nine>;<nine>;<nine>
+<a>                     <a>;<a>;<a>
+<A>                     <a>;<a>;<A>
+<b>                     <b>;<b>;<b>
+<B>                     <b>;<b>;<B>
+<c>                     <c>;<c>;<c>
+<C>                     <c>;<c>;<C>
+<d>                     <d>;<d>;<d>
+<D>                     <d>;<d>;<D>
+<e>                     <e>;<e>;<e>
+<E>                     <e>;<e>;<E>
+<f>                     <f>;<f>;<f>
+<F>                     <f>;<f>;<F>
+<g>                     <g>;<g>;<g>
+<G>                     <g>;<g>;<G>
+<h>                     <h>;<h>;<h>
+<H>                     <h>;<h>;<H>
+<i>                     <i>;<i>;<i>
+<I>                     <i>;<i>;<I>
+<j>                     <j>;<j>;<j>
+<J>                     <j>;<j>;<J>
+<k>                     <k>;<k>;<k>
+<K>                     <k>;<k>;<K>
+<l>                     <l>;<l>;<l>
+<L>                     <l>;<l>;<L>
+<m>                     <m>;<m>;<m>
+<M>                     <m>;<m>;<M>
+<n>                     <n>;<n>;<n>
+<N>                     <n>;<n>;<N>
+<o>                     <o>;<o>;<o>
+<O>                     <o>;<o>;<O>
+<p>                     <p>;<p>;<p>
+<P>                     <p>;<p>;<P>
+<q>                     <q>;<q>;<q>
+<Q>                     <q>;<q>;<Q>
+<r>                     <r>;<r>;<r>
+<R>                     <r>;<r>;<R>
+<s>                     <s>;<s>;<s>
+<S>                     <s>;<s>;<S>
+<t>                     <t>;<t>;<t>
+<T>                     <t>;<t>;<T>
+<u>                     <u>;<u>;<u>
+<U>                     <u>;<u>;<U>
+<v>                     <v>;<v>;<v>
+<V>                     <v>;<v>;<V>
+<w>                     <w>;<w>;<w>
+<W>                     <w>;<w>;<W>
+<x>                     <x>;<x>;<x>
+<X>                     <x>;<x>;<X>
+<y>                     <y>;<y>;<y>
+<Y>                     <y>;<y>;<Y>
+<z>                     <z>;<z>;<z>
+<Z>                     <z>;<z>;<Z>
+<cyr-a>                 <cyr-a>;<cyr-a>;<cyr-a>
+<cyr-A>                 <cyr-a>;<cyr-a>;<cyr-A>
+<cyr-be>                <cyr-be>;<cyr-be>;<cyr-be>
+<cyr-BE>                <cyr-be>;<cyr-be>;<cyr-BE>
+<cyr-ve>                <cyr-ve>;<cyr-ve>;<cyr-ve>
+<cyr-VE>                <cyr-ve>;<cyr-ve>;<cyr-VE>
+<cyr-ghe>               <cyr-ghe>;<cyr-ghe>;<cyr-ghe>
+<cyr-GHE>               <cyr-ghe>;<cyr-ghe>;<cyr-GHE>
+<cyr-de>                <cyr-de>;<cyr-de>;<cyr-de>
+<cyr-DE>                <cyr-de>;<cyr-de>;<cyr-DE>
+<cyr-ie>                <cyr-ie>;<cyr-ie>;<cyr-ie>
+<cyr-IE>                <cyr-ie>;<cyr-ie>;<cyr-IE>
+<ukrainian-ie>          <ukrainian-ie>;<ukrainian-ie>;<ukrainian-ie>
+<ukrainian-IE>          <ukrainian-ie>;<ukrainian-ie>;<ukrainian-IE>
+<cyr-io>                <cyr-io>;<cyr-io>;<cyr-io>
+<cyr-IO>                <cyr-io>;<cyr-io>;<cyr-IO>
+<cyr-zhe>               <cyr-zhe>;<cyr-zhe>;<cyr-zhe>
+<cyr-ZHE>               <cyr-zhe>;<cyr-zhe>;<cyr-ZHE>
+<cyr-ze>                <cyr-ze>;<cyr-ze>;<cyr-ze>
+<cyr-ZE>                <cyr-ze>;<cyr-ze>;<cyr-ZE>
+<cyr-i>                 <cyr-i>;<cyr-i>;<cyr-i>
+<cyr-I>                 <cyr-i>;<cyr-i>;<cyr-I>
+<ukrainian-yi>          <ukrainian-yi>;<ukrainian-yi>;<ukrainian-yi>
+<ukrainian-YI>          <ukrainian-yi>;<ukrainian-yi>;<ukrainian-YI>
+<cyr-shorti>            <cyr-shorti>;<cyr-shorti>;<cyr-shorti>
+<cyr-SHORTI>            <cyr-shorti>;<cyr-shorti>;<cyr-SHORTI>
+<cyr-ka>                <cyr-ka>;<cyr-ka>;<cyr-ka>
+<cyr-KA>                <cyr-ka>;<cyr-ka>;<cyr-KA>
+<cyr-el>                <cyr-el>;<cyr-el>;<cyr-el>
+<cyr-EL>                <cyr-el>;<cyr-el>;<cyr-EL>
+<cyr-em>                <cyr-em>;<cyr-em>;<cyr-em>
+<cyr-EM>                <cyr-em>;<cyr-em>;<cyr-EM>
+<cyr-en>                <cyr-en>;<cyr-en>;<cyr-en>
+<cyr-EN>                <cyr-en>;<cyr-en>;<cyr-EN>
+<cyr-o>                 <cyr-o>;<cyr-o>;<cyr-o>
+<cyr-O>                 <cyr-o>;<cyr-o>;<cyr-O>
+<cyr-pe>                <cyr-pe>;<cyr-pe>;<cyr-pe>
+<cyr-PE>                <cyr-pe>;<cyr-pe>;<cyr-PE>
+<cyr-er>                <cyr-er>;<cyr-er>;<cyr-er>
+<cyr-ER>                <cyr-er>;<cyr-er>;<cyr-ER>
+<cyr-es>                <cyr-es>;<cyr-es>;<cyr-es>
+<cyr-ES>                <cyr-es>;<cyr-es>;<cyr-ES>
+<cyr-te>                <cyr-te>;<cyr-te>;<cyr-te>
+<cyr-TE>                <cyr-te>;<cyr-te>;<cyr-TE>
+<cyr-u>                 <cyr-u>;<cyr-u>;<cyr-u>
+<cyr-U>                 <cyr-u>;<cyr-u>;<cyr-U>
+<byelorussian-shortu>   <byelorussian-shortu>;<byelorussian-shortu>;<byelorussian-shortu>
+<byelorussian-SHORTU>   <byelorussian-shortu>;<byelorussian-shortu>;<byelorussian-SHORTU>
+<cyr-ef>                <cyr-ef>;<cyr-ef>;<cyr-ef>
+<cyr-EF>                <cyr-ef>;<cyr-ef>;<cyr-EF>
+<cyr-ha>                <cyr-ha>;<cyr-ha>;<cyr-ha>
+<cyr-HA>                <cyr-ha>;<cyr-ha>;<cyr-HA>
+<cyr-tse>               <cyr-tse>;<cyr-tse>;<cyr-tse>
+<cyr-TSE>               <cyr-tse>;<cyr-tse>;<cyr-TSE>
+<cyr-che>               <cyr-che>;<cyr-che>;<cyr-che>
+<cyr-CHE>               <cyr-che>;<cyr-che>;<cyr-CHE>
+<cyr-sha>               <cyr-sha>;<cyr-sha>;<cyr-sha>
+<cyr-SHA>               <cyr-sha>;<cyr-sha>;<cyr-SHA>
+<cyr-shcha>             <cyr-shcha>;<cyr-shcha>;<cyr-shcha>
+<cyr-SHCHA>             <cyr-shcha>;<cyr-shcha>;<cyr-SHCHA>
+<hardsign>              <hardsign>;<hardsign>;<hardsign>
+<HARDSIGN>              <hardsign>;<hardsign>;<HARDSIGN>
+<cyr-yeru>              <cyr-yeru>;<cyr-yeru>;<cyr-yeru>
+<cyr-YERU>              <cyr-yeru>;<cyr-yeru>;<cyr-YERU>
+<softsign>              <softsign>;<softsign>;<softsign>
+<SOFTSIGN>              <softsign>;<softsign>;<SOFTSIGN>
+<cyr-e>                 <cyr-e>;<cyr-e>;<cyr-e>
+<cyr-E>                 <cyr-e>;<cyr-e>;<cyr-E>
+<cyr-yu>                <cyr-yu>;<cyr-yu>;<cyr-yu>
+<cyr-YU>                <cyr-yu>;<cyr-yu>;<cyr-YU>
+<cyr-ya>                <cyr-ya>;<cyr-ya>;<cyr-ya>
+<cyr-YA>                <cyr-ya>;<cyr-ya>;<cyr-YA>
+
+order_end
+
+END LC_COLLATE
+
+
+#############
+LC_MONETARY
+#############
+
+int_curr_symbol   "<cyr-er><cyr-u><cyr-be><space>"
+currency_symbol   "<cyr-er><cyr-u><cyr-be><period>"
+mon_decimal_point "<period>"
+mon_thousands_sep "<comma>"
+mon_grouping      "3;0"
+positive_sign     "<plus-sign>"
+negative_sign     "<hyphen>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     0
+p_sep_by_space    1
+n_cs_precedes     0
+n_sep_by_space    1
+p_sign_posn       1
+n_sign_posn       1
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     "<comma>"
+thousands_sep     "<period>"
+grouping          "3;0"
+
+END LC_NUMERIC
+
+
+#############
+LC_TIME
+#############
+abday   "<cyr-ve><cyr-o><cyr-es><period>";\
+        "<cyr-pe><cyr-o><cyr-en><period>";\
+        "<cyr-ve><cyr-te><cyr-o><period>";\
+        "<cyr-es><cyr-er><cyr-ie><period>";\
+        "<cyr-che><cyr-ie><cyr-te><period>";\
+        "<cyr-pe><cyr-ie><cyr-te><period>";\
+        "<cyr-es><cyr-u><cyr-be><period>"
+
+day     "<cyr-ve><cyr-o><cyr-es><cyr-ka><cyr-er><cyr-ie><cyr-es><cyr-ie><cyr-en><softsign><cyr-ie>";\
+        "<cyr-pe><cyr-o><cyr-en><cyr-ie><cyr-de><cyr-ie><cyr-el><softsign><cyr-en><cyr-i><cyr-ka>";\
+        "<cyr-ve><cyr-te><cyr-o><cyr-er><cyr-en><cyr-i><cyr-ka>";\
+        "<cyr-es><cyr-er><cyr-ie><cyr-de><cyr-a>";\
+        "<cyr-che><cyr-ie><cyr-te><cyr-ve><cyr-ie><cyr-er><cyr-ghe>";\
+        "<cyr-pe><cyr-ya><cyr-te><cyr-en><cyr-i><cyr-tse><cyr-a>";\
+        "<cyr-es><cyr-u><cyr-be><cyr-be><cyr-o><cyr-te><cyr-a>"
+
+abmon   "<cyr-ya><cyr-en><cyr-ve><period>";\
+        "<cyr-ef><cyr-ie><cyr-ve><period>";\
+        "<cyr-em><cyr-a><cyr-er><period>";\
+        "<cyr-a><cyr-pe><cyr-er><period>";\
+        "<cyr-em><cyr-a><cyr-ya>";\
+        "<cyr-i><cyr-yu><cyr-en><period>";\
+        "<cyr-i><cyr-yu><cyr-el><period>";\
+        "<cyr-a><cyr-ve><cyr-ghe><period>";\
+        "<cyr-es><cyr-ie><cyr-en><period>";\
+        "<cyr-o><cyr-ka><cyr-te><period>";\
+        "<cyr-en><cyr-o><cyr-ya><period>";\
+        "<cyr-de><cyr-ie><cyr-ka><period>"
+
+mon     "<cyr-ya><cyr-en><cyr-ve><cyr-a><cyr-er><cyr-ya>";\
+        "<cyr-ef><cyr-ie><cyr-ve><cyr-er><cyr-a><cyr-el><cyr-ya>";\
+        "<cyr-em><cyr-a><cyr-er><cyr-te><cyr-a>";\
+        "<cyr-a><cyr-pe><cyr-er><cyr-ie><cyr-el><cyr-ya>";\
+        "<cyr-em><cyr-a><cyr-ya>";\
+        "<cyr-i><cyr-yu><cyr-en><cyr-ya>";\
+        "<cyr-i><cyr-yu><cyr-el><cyr-ya>";\
+        "<cyr-a><cyr-ve><cyr-ghe><cyr-u><cyr-es><cyr-te><cyr-a>";\
+        "<cyr-es><cyr-ie><cyr-en><cyr-te><cyr-ya><cyr-be><cyr-er><cyr-ya>";\
+        "<cyr-o><cyr-ka><cyr-te><cyr-ya><cyr-be><cyr-er><cyr-ya>";\
+        "<cyr-en><cyr-o><cyr-ya><cyr-be><cyr-er><cyr-ya>";\
+        "<cyr-de><cyr-ie><cyr-ka><cyr-a><cyr-be><cyr-er><cyr-ya>"
+
+d_t_fmt "%A %e %B %Y <cyr-ghe><period> %H.%M.%S"
+
+d_fmt   "%d.%m.%y"
+
+t_fmt   "%H.%M.%S"
+
+nlldate "%d %b %Y"
+nlyear  "19890108,Heisei:19261225,Showa:"
+nltmisc "at:each:every:on:through:am:pm:zulu"
+nltstr  "now:yesterday:tomorrow:noon:midnight:next:weekdays:weekend:today"
+nltunits        "minute:minutes:hour:hours:day:days:week:weeks:month:months:year:years:min:mins"
+
+am_pm   "";""
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+yesexpr "^([dD]|[dD][aA])"
+noexpr  "^([nN]|[nN][eE])"
+yesstr  "da:d:D"
+nostr   "ne:n:N"
+
+END LC_MESSAGES
